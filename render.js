@@ -40,6 +40,7 @@ const dispatchAction = (index, actionType, event) => {
 /**
  * Prevent DOM Refresh with event.PreventDefault() when manual input is submitted. 
  * Assign the operator value to either + or - for the dispatcher to handle.
+ * The operator value is extracted with event.target.value
  * Grab the value of the input with document.getElementById
  * Pass all three values into the dispatchAction function.
  * @param {*} event 
