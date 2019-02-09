@@ -11,19 +11,19 @@
 const dispatchAction = (index, actionType, event) => {
     switch(actionType) {
         case "increment":
-            dispatch({ type: "INCREMENT", payload: {index: index } });
+            dispatch({ type: "INCREMENT", payload: { index: index } });
             break;
         case "decrement":
-            dispatch({ type: "DECREMENT", payload: {index: index } });
+            dispatch({ type: "DECREMENT", payload: { index: index } });
             break;
         case "incrementFive":
-            dispatch({ type: "INCREMENT_FIVE", payload: {index: index } });
+            dispatch({ type: "INCREMENT_FIVE", payload: { index: index } });
             break;
         case "decrementFive":
-            dispatch({ type: "DECREMENT_FIVE", payload: {index: index } });
+            dispatch({ type: "DECREMENT_FIVE", payload: { index: index } });
             break;
         case "changeColor":
-            dispatch({ type: "CHANGE_COLOR", payload: {index: index, color: event.target.value } });
+            dispatch({ type: "CHANGE_COLOR", payload: { index: index, color: event.target.value } });
             break;
         case "+":
             dispatch({ type: "INCREMENT_MANUAL_VALUE", payload: { index: index, value: event } });
@@ -67,23 +67,25 @@ const handleSubmit = (index, event) => {
  */
 const renderCounters = (state) => {
     const counters = state.counters.map((counter, index) => {
-        return `<h1 id="counterValue" style="color: ${counter.color};">${counter.value}</h1>
-                <button onclick="dispatchAction(${index}, 'increment')">+1</button>
-                <button onclick="dispatchAction(${index}, 'decrement')">-1</button>
-                <button onclick="dispatchAction(${index}, 'incrementFive')">+5</button>
-                <button onclick="dispatchAction(${index}, 'decrementFive')">-5</button>
-                <div style="margin: 10px auto;">
-                    <input id="numberInput_${index}" placeholder="Enter Number" style="width: 150px;" />
-                    <input onclick="handleSubmit(${index}, event)" id="add" name="submit" value="+" type="submit" />
-                    <input onclick="handleSubmit(${index}, event)" id="subtract" name="submit" value="-" type="submit" />
-                </div>
-                <select onchange="dispatchAction(${index}, 'changeColor', event)">
-                    <option>Select a Color</option>
-                    <option value="black">Black</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option> 
-                </select>`
+        return `<div key=${index}>
+                    <h1 id="counterValue" style="color:${counter.color};">${counter.value}</h1>
+                    <button onclick="dispatchAction(${index}, 'increment')">+1</button>
+                    <button onclick="dispatchAction(${index}, 'decrement')">-1</button>
+                    <button onclick="dispatchAction(${index}, 'incrementFive')">+5</button>
+                    <button onclick="dispatchAction(${index}, 'decrementFive')">-5</button>
+                    <div style="margin: 10px auto;">
+                        <input id="numberInput_${index}" placeholder="Enter Number" style="width: 150px;" />
+                        <input onclick="handleSubmit(${index}, event)" id="add" name="submit" value="+" type="submit" />
+                        <input onclick="handleSubmit(${index}, event)" id="subtract" name="submit" value="-" type="submit" />
+                    </div>
+                    <select onchange="dispatchAction(${index}, 'changeColor', event)">
+                        <option>Select a Color</option>
+                        <option value="black">Black</option>
+                        <option value="red">Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option> 
+                    </select>
+                </div>`
     });
     return counters.join("");
 }
